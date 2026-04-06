@@ -6,7 +6,7 @@ export const Route = createFileRoute("/")({
 
 function HomePage() {
   return (
-    <main style={{ fontFamily: "system-ui, sans-serif", padding: "2rem" }}>
+    <main>
       <h1>TanStack Start + Bun + Nitro</h1>
       <p>
         Your app is ready to build with Bun and run in a Nitro-compatible

@@ -1,6 +1,7 @@
 /// <reference types="vite/client" />
 
 import type { ReactNode } from "react";
+import { ThemeProvider } from "next-themes";
 import {
   Outlet,
   createRootRoute,
@@ -19,6 +20,7 @@ export const Route = createRootRoute({
       {
         name: "viewport",
         content: "width=device-width, initial-scale=1",
+        title: "Xpay",
       },
       {
         name: "apple-mobile-web-app-title",
@@ -47,6 +49,13 @@ export const Route = createRootRoute({
     ],
   }),
 
+  notFoundComponent: () => (
+    <main style={{ padding: "2rem", fontFamily: "system-ui, sans-serif" }}>
+      <h1>Not Found</h1>
+      <p>The page you requested does not exist.</p>
+    </main>
+  ),
+
   component: RootComponent,
 });
 
@@ -60,12 +69,19 @@ function RootComponent() {
 
 function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
       <body>
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
         <Scripts />
       </body>
     </html>
