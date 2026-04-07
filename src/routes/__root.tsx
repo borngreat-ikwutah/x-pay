@@ -10,6 +10,10 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import { generateSeo } from "~/lib/seo";
+import { MobileGuard } from "~/components/mobile-guard";
+import { useDeviceStore } from "~/stores/device-store";
+import { ErrorPage } from "~/components/error-page";
 
 export const Route = createRootRoute({
   head: () => ({
@@ -20,11 +24,11 @@ export const Route = createRootRoute({
       {
         name: "viewport",
         content: "width=device-width, initial-scale=1",
-        title: "Xpay",
       },
+      ...generateSeo(),
       {
         name: "apple-mobile-web-app-title",
-        content: "XPay",
+        content: "Xpay",
       },
     ],
     links: [
@@ -35,27 +39,27 @@ export const Route = createRootRoute({
       {
         rel: "icon",
         type: "image/png",
-        href: "/favicon-96x96.png",
+        href: "/favicon-96x96.png?v=2",
         sizes: "96x96",
       },
-      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
-      { rel: "shortcut icon", href: "/favicon.ico" },
+      { rel: "icon", type: "image/svg+xml", href: "/favicon.svg?v=2" },
+      { rel: "shortcut icon", href: "/favicon.ico?v=2" },
       {
         rel: "apple-touch-icon",
         sizes: "180x180",
-        href: "/apple-touch-icon.png",
+        href: "/apple-touch-icon.png?v=2",
       },
-      { rel: "manifest", href: "/site.webmanifest" },
+      { rel: "manifest", href: "/site.webmanifest?v=2" },
     ],
   }),
 
   notFoundComponent: () => (
-    <main style={{ padding: "2rem", fontFamily: "system-ui, sans-serif" }}>
-      <h1>Not Found</h1>
-      <p>The page you requested does not exist.</p>
-    </main>
+    <ErrorPage
+      title="Not Found"
+      description="The page you requested does not exist."
+    />
   ),
-
+  errorComponent: ({ error }) => <ErrorPage error={error} />,
   component: RootComponent,
 });
 
@@ -80,7 +84,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <MobileGuard>{children}</MobileGuard>
         </ThemeProvider>
         <Scripts />
       </body>
