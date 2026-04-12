@@ -11,6 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as OnboardingIndexRouteImport } from './routes/onboarding/index'
 import { Route as publicPublicIndexRouteImport } from './routes/(public)/_public/index'
+import { Route as publicPublicProfileRouteImport } from './routes/(public)/_public/profile'
+import { Route as publicPublicHistoryRouteImport } from './routes/(public)/_public/history'
+import { Route as publicPublicGuardRouteImport } from './routes/(public)/_public/guard'
+import { Route as publicPublicDiscoverRouteImport } from './routes/(public)/_public/discover'
 
 const OnboardingIndexRoute = OnboardingIndexRouteImport.update({
   id: '/onboarding/',
@@ -22,30 +26,79 @@ const publicPublicIndexRoute = publicPublicIndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const publicPublicProfileRoute = publicPublicProfileRouteImport.update({
+  id: '/(public)/_public/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const publicPublicHistoryRoute = publicPublicHistoryRouteImport.update({
+  id: '/(public)/_public/history',
+  path: '/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const publicPublicGuardRoute = publicPublicGuardRouteImport.update({
+  id: '/(public)/_public/guard',
+  path: '/guard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const publicPublicDiscoverRoute = publicPublicDiscoverRouteImport.update({
+  id: '/(public)/_public/discover',
+  path: '/discover',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/onboarding/': typeof OnboardingIndexRoute
+  '/discover': typeof publicPublicDiscoverRoute
+  '/guard': typeof publicPublicGuardRoute
+  '/history': typeof publicPublicHistoryRoute
+  '/profile': typeof publicPublicProfileRoute
   '/': typeof publicPublicIndexRoute
 }
 export interface FileRoutesByTo {
   '/onboarding': typeof OnboardingIndexRoute
+  '/discover': typeof publicPublicDiscoverRoute
+  '/guard': typeof publicPublicGuardRoute
+  '/history': typeof publicPublicHistoryRoute
+  '/profile': typeof publicPublicProfileRoute
   '/': typeof publicPublicIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/onboarding/': typeof OnboardingIndexRoute
+  '/(public)/_public/discover': typeof publicPublicDiscoverRoute
+  '/(public)/_public/guard': typeof publicPublicGuardRoute
+  '/(public)/_public/history': typeof publicPublicHistoryRoute
+  '/(public)/_public/profile': typeof publicPublicProfileRoute
   '/(public)/_public/': typeof publicPublicIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/onboarding/' | '/'
+  fullPaths:
+    | '/onboarding/'
+    | '/discover'
+    | '/guard'
+    | '/history'
+    | '/profile'
+    | '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/onboarding' | '/'
-  id: '__root__' | '/onboarding/' | '/(public)/_public/'
+  to: '/onboarding' | '/discover' | '/guard' | '/history' | '/profile' | '/'
+  id:
+    | '__root__'
+    | '/onboarding/'
+    | '/(public)/_public/discover'
+    | '/(public)/_public/guard'
+    | '/(public)/_public/history'
+    | '/(public)/_public/profile'
+    | '/(public)/_public/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   OnboardingIndexRoute: typeof OnboardingIndexRoute
+  publicPublicDiscoverRoute: typeof publicPublicDiscoverRoute
+  publicPublicGuardRoute: typeof publicPublicGuardRoute
+  publicPublicHistoryRoute: typeof publicPublicHistoryRoute
+  publicPublicProfileRoute: typeof publicPublicProfileRoute
   publicPublicIndexRoute: typeof publicPublicIndexRoute
 }
 
@@ -65,11 +118,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof publicPublicIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/(public)/_public/profile': {
+      id: '/(public)/_public/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof publicPublicProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(public)/_public/history': {
+      id: '/(public)/_public/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof publicPublicHistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(public)/_public/guard': {
+      id: '/(public)/_public/guard'
+      path: '/guard'
+      fullPath: '/guard'
+      preLoaderRoute: typeof publicPublicGuardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(public)/_public/discover': {
+      id: '/(public)/_public/discover'
+      path: '/discover'
+      fullPath: '/discover'
+      preLoaderRoute: typeof publicPublicDiscoverRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   OnboardingIndexRoute: OnboardingIndexRoute,
+  publicPublicDiscoverRoute: publicPublicDiscoverRoute,
+  publicPublicGuardRoute: publicPublicGuardRoute,
+  publicPublicHistoryRoute: publicPublicHistoryRoute,
+  publicPublicProfileRoute: publicPublicProfileRoute,
   publicPublicIndexRoute: publicPublicIndexRoute,
 }
 export const routeTree = rootRouteImport

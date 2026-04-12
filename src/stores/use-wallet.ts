@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { isConnected, requestAccess } from "@stellar/freighter-api";
+import freighterApi from "@stellar/freighter-api";
+const { isConnected, requestAccess } = freighterApi;
 import { toast } from "sonner";
 
 interface WalletState {

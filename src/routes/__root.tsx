@@ -12,7 +12,6 @@ import {
 import appCss from "../styles.css?url";
 import { generateSeo } from "~/lib/seo";
 import { MobileGuard } from "~/components/mobile-guard";
-import { useDeviceStore } from "~/stores/device-store";
 import { ErrorPage } from "~/components/error-page";
 
 export const Route = createRootRoute({
